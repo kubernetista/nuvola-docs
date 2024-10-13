@@ -1,12 +1,6 @@
 # uv setup for MkDocs :sparkles:
 
-Some icons/emojis:
-
-- :fontawesome-regular-face-laugh-wink:{ .emoji }
-
-- :octicons-heart-fill-24:{ .heart }
-
-- :fontawesome-brands-youtube:{ .youtube }
+Set up mkdocs
 
 ```sh
 # Set project name

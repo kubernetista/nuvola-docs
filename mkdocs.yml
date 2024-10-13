@@ -31,8 +31,8 @@ theme:
     # text: 'Roboto, sans-serif'
     code: Red Hat Mono
     # code: 'Roboto Mono, monospace'
-  logo: fontawesome/solid/w
-  # logo: 'images/logo.png'
+  # logo: ":material-cloud:"
+  logo: assets/cloud.svg
   # favicon: 'images/favicon.ico'
   search: true
 
@@ -53,5 +53,5 @@ markdown_extensions:
   - pymdownx.superfences
 
 plugins:
-  - typeset
   - privacy
+  # - typeset
