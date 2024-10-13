@@ -6,7 +6,7 @@ Set up mkdocs
 # Set project name
 export UV_PROJECT="nuvola-docs"
 
-# Pin Python version to the stable one (latest - 1)
+# Pin Python version to a stable one (we use latest - 1)
 uv python pin 3.12
 
 # Initialize project
