@@ -4,18 +4,9 @@ site_url: https://sitename.example
 theme:
   name: material
   palette:
-    # Dark Mode
-    - scheme: slate
-      toggle:
-        icon: material/weather-sunny
-        name: Dark mode
-      primary: amber
-      # primary: blue
-      # accent: indigo
-      accent: deep orange
-
     # Light Mode
-    - scheme: default
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
       toggle:
         icon: material/weather-night
         name: Light mode
@@ -26,15 +17,36 @@ theme:
       background: white
       text: black
 
+    # Dark Mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/weather-sunny
+        name: Dark mode
+      primary: amber
+      # primary: blue
+      # accent: indigo
+      accent: deep orange
+
+
   font:
     text: Merriweather Sans
     # text: 'Roboto, sans-serif'
     code: Red Hat Mono
     # code: 'Roboto Mono, monospace'
+  icon:
+    repo: fontawesome/brands/github
   # logo: ":material-cloud:"
   logo: assets/cloud.svg
   # favicon: 'images/favicon.ico'
   search: true
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/kubernetista/nuvola
+    - icon: fontawesome/brands/python
+      link: https://pypi.org/project/nuvola-fastapi-uv
 
 extra_css:
   - stylesheets/extra.css
