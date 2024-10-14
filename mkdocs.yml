@@ -30,9 +30,11 @@ theme:
 
 
   font:
-    text: Merriweather Sans
+    # text: Merriweather Sans
+    text: DM Sans
     # text: 'Roboto, sans-serif'
-    code: Red Hat Mono
+    code: Fira Code
+    # code: Red Hat Mono
     # code: 'Roboto Mono, monospace'
   icon:
     repo: fontawesome/brands/github
