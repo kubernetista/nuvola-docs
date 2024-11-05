@@ -12,8 +12,8 @@ uv python pin 3.12
 # Initialize project
 uv init --no-package --no-readme --name "${UV_PROJECT}"
 
-# Add MkDocs + Marterial package
-uv add mkdocs-material
+# Add MkDocs + Marterial package + Awesome Pages plugin
+uv add mkdocs-material mkdocs-awesome-pages-plugin
 
 # Install required packages
 uv sync
@@ -22,6 +22,6 @@ uv sync
 uv run mkdocs new .
 
 # Check & develop
-mkdocs serve
+uv run mkdocs serve
 
 ```
