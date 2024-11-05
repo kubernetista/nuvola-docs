@@ -1,5 +1,5 @@
 site_name: Nuvola
-site_url: https://sitename.example
+site_url: https://kubernetista.github.io/nuvola-docs/
 
 theme:
   name: material
