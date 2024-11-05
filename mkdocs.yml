@@ -7,7 +7,7 @@ nav:
     - Quick Start: "Quick-Start.md"
     # - How it works: "Readme-mark1.md"
   - Installation step-by-step:
-    - Vault + External Secrets.md: "Quick-Start-Vault-ESO.md"
+    - Vault + External Secrets.md: "Vault-ESO.md"
   - Traefik:
     - Traefik: "Traefik-1.md"
     - Start Traefik & Gitea runner: "TEMP-Readme-Traefik-and-Runner.md"
