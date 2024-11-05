@@ -1,6 +1,6 @@
 # Quick Start
 
-## Kubernetes cluster
+## 1. Kubernetes cluster
 
 Create a Kubernetes cluster with k3d/k3s
 
@@ -18,6 +18,8 @@ just k3d-cluster-generate-config
 # Create the k3d cluster
 just k3d-cluster-create
 
+# Wait about a minute to allow the namespaces to be created by ArgoCD
+
 # Create the required secrets
 kubectl apply -f secrets/
 
@@ -29,13 +31,20 @@ open https://argocd.localtest.me
 
 ```
 
-## TLS using kixelated/mkcert
+## Certificate for HTTPS (using kixelated/mkcert)
 
-#### ⭕️ TODO: replace the steps below with a container or a Dagger module
+!!! todo
+    ☑️ TODO: replace the steps below with a container or a Dagger module ☑️
 
 Generate a new TLS certificate with kixelated/mkcert, and add it tp Traefik.
 
 The certificate will last 20 days (for security reasons) but you can adjust it.
+
+!!! warning
+    🛫 If you already have a valid certificate, for example because you already generated
+    it following the steps below, then jump to [__step 3__](#3-install-the-certificates-and-reload-traefik) 🛫
+
+## 2. Generate the certs
 
 ```sh
 # Generate the certs with expiration in 20gg using kixelated/mkcert
@@ -74,14 +83,29 @@ cd traefik-mkcert-docker/certs
 
 ```
 
-## Configure Vault and External Secrets
+## 3. Install the certificates and reload Traefik
 
-Without configuring Vault and ExternalSecrets many features will be missing.
+```sh
+# Switch to the directory containing the certs
+cd nuvola/_assets/secrets
 
-Vault is currently being configured in Development mode, so at every restart
-of the container the secrets and the configuration are reset to the default values.
+# Create
+kubectl apply -f secret-tls-${CERT_NAME}.yaml
 
-Therefore, the steps below may be required after you restart Docker Desktop of your laptop.
+# Restart Traefik to load the new cert
+kubectl rollout restart deployment traefik -n traefik
+
+```
+
+## 4. Configure Vault and External Secrets
+
+!!! info
+    Vault is currently being configured in Development mode, so at every restart
+    of the container the secrets and the configuration are reset to the default values.
+
+    Therefore, the steps below will be required at every Docker Desktop or laptop restart.
+
+Without configuring Vault and ExternalSecrets many features will be missing, so:
 
 ```sh
 # Switch to the ExternalSecrets helm projext
@@ -91,10 +115,10 @@ cd external-secrets-helm
 just setup-vault-eso-test-app
 ```
 
-## Configuration completed
+## 🎉 Configuration completed
 
-🎉 Congratulations, your Nuvola is ready!
+Congratulations, your Nuvola is ready! ☁️
 
 Explore the [documentation home](/) to discover the full range of tools Nuvola offers.
 
-**☁️ Enjoy!**
+__☁️ Enjoy!__
