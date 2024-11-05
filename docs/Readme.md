@@ -1,6 +1,8 @@
 # Quick Start
 
-## 1. Kubernetes cluster
+Nuvola ☁️: a Local Developer Platform.
+
+## 1. Create a Kubernetes cluster
 
 Create a Kubernetes cluster with k3d/k3s
 
@@ -18,16 +20,48 @@ just k3d-cluster-generate-config
 # Create the k3d cluster
 just k3d-cluster-create
 
-# Wait about a minute to allow the namespaces to be created by ArgoCD
+```
 
-# Create the required secrets
-kubectl apply -f secrets/
+## 2. Wait ⏳
 
+#### Wait a few minutes to let ArgoCD deploy all the resources
+
+```
+# Watch pod creation
+kubectl get pod -n vault -w
+
+# Wait for the git namespace to be available
+kubectl get pod -n git -w
+```
+
+It usually takes between 2 and 5 minutes.
+
+In the mean time, you could check ArgoCD deployment progesess, either with the CLI, or
+from the web UI:
+
+```sh
 # Get the ArgoCD initial password
 argocd admin initial-password -n argocd | head -n 1
 
+# Login
+argocd login --insecure --grpc-web --username admin argocd.localtest.me
+
+# Check progress
+argocd app wait apps --health --sync
+
+# port forward
+kubectl port-forward service/argocd-server -n argocd 8080:443
+
 # Open the ArgoCD web UI and login with user "admin" and the password above
-open https://argocd.localtest.me
+open https://localhost:8080
+
+```
+
+#### Once the ArgoCD apps are synced, proceed creating the secrets
+
+```sh
+# Create the required secrets
+kubectl apply -f secrets/
 
 ```
 
@@ -44,7 +78,7 @@ The certificate will last 20 days (for security reasons) but you can adjust it.
     🛫 If you already have a valid certificate, for example because you already generated
     it following the steps below, then jump to [__step 3__](#3-install-the-certificates-and-reload-traefik) 🛫
 
-## 2. Generate the certs
+## 3. Generate the certs
 
 ```sh
 # Generate the certs with expiration in 20gg using kixelated/mkcert
@@ -71,25 +105,16 @@ mv _wildcard.localtest.me-key.pem  ${CERT_NAME}-key.pem
 kubectl create -n default secret tls ${CERT_NAME}-tls \
     --cert=${CERT_NAME}.pem --key=${CERT_NAME}-key.pem \
     --dry-run=client -o yaml | kubectl neat > secret-tls-${CERT_NAME}.yaml
-
-# Create
-kubectl apply -f secret-tls-${CERT_NAME}.yaml
-
-# Restart Traefik to load the new cert
-kubectl rollout restart deployment traefik -n traefik
-
-# (Eventually, the other certs are in the project `traefik-mkcert-docker`)
-cd traefik-mkcert-docker/certs
-
 ```
 
-## 3. Install the certificates and reload Traefik
+## 4. Install the certificates and reload Traefik
 
 ```sh
 # Switch to the directory containing the certs
 cd nuvola/_assets/secrets
 
-# Create
+# Create the secret containing the TLS certificate and its key
+CERT_NAME="wildcard-localtest-me"
 kubectl apply -f secret-tls-${CERT_NAME}.yaml
 
 # Restart Traefik to load the new cert
@@ -97,7 +122,7 @@ kubectl rollout restart deployment traefik -n traefik
 
 ```
 
-## 4. Configure Vault and External Secrets
+## 5. Configure Vault and External Secrets
 
 !!! info
     Vault is currently being configured in Development mode, so at every restart
@@ -111,6 +136,9 @@ Without configuring Vault and ExternalSecrets many features will be missing, so:
 # Switch to the ExternalSecrets helm projext
 cd external-secrets-helm
 
+# Wait for vault to be ready
+kubectl wait -n vault --for=condition=ready pod -l app.kubernetes.io/instance=vault
+
 # Run the setup script using Just
 just setup-vault-eso-test-app
 ```
@@ -122,3 +150,12 @@ Congratulations, your Nuvola is ready! ☁️
 Explore the [documentation home](/) to discover the full range of tools Nuvola offers.
 
 __☁️ Enjoy!__
+
+## Troubleshooting
+
+If some resources are unavailable wia the browser, it could be due to Traefik: restart it.
+
+```sh
+# Restart Traefik
+kubectl rollout restart deployment traefik -n traefik
+```

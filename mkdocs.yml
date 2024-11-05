@@ -4,7 +4,7 @@ site_url: https://docs.localtest.me/
 nav:
   - Home: "index.md"
   - Quick Start:
-    - Quick Start: "Quick-Start.md"
+    - Quick Start: "Readme.md"
     # - How it works: "Readme-mark1.md"
   - Installation step-by-step:
     - Vault + External Secrets.md: "Vault-ESO.md"
