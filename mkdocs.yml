@@ -1,8 +1,13 @@
 site_name: Nuvola
-site_url: https://kubernetista.github.io/nuvola-docs/
+site_url: https://docs.localtest.me/
 
 theme:
   name: material
+  features:
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.instant
+    - navigation.sections
   palette:
     # Light Mode
     - media: "(prefers-color-scheme: light)"
@@ -70,3 +75,13 @@ plugins:
   - awesome-pages
   - privacy
   # - typeset
+
+nav:
+  - Home: "index.md"
+  - Quick Start:
+    - Quick Start: "Readme-quick-setup-mark3.md"
+    - How it works: "Readme-mark1.md"
+  - Traefik:
+    - Start Traefik & Gitea runner: "TEMP-Readme-Traefik-and-Runner.md"
+  - Examples:
+    - Introduction: "Readme-Usage.md"
