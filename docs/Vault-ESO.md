@@ -186,11 +186,8 @@ If it works you should see the secrets you created.
 ```sh
 # Create a Kubernetes secret to store the Vault credentials (the Vault token)
 
-kubectl create secret generic vault-token --from-literal=token=<VAULT_TOKEN> \
-  --namespace external-secrets
+VAULT_TOKEN="test"
 
-hvs.ex8eTk8HIp2tDAKeMQw61jJD
-
-kubectl create secret generic vault-token --from-literal=token=hvs.ex8eTk8HIp2tDAKeMQw61jJD \
+kubectl create secret generic vault-token --from-literal=token=${VAULT_TOKEN} \
   --namespace external-secrets
 ```

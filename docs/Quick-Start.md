@@ -31,7 +31,7 @@ open https://argocd.localtest.me
 
 ## TLS using kixelated/mkcert
 
-#### ⭕️ TODO: replace this with a container and/or a Dagger module
+#### ⭕️ TODO: replace the steps below with a container or a Dagger module
 
 Generate a new TLS certificate with kixelated/mkcert, and add it tp Traefik.
 
