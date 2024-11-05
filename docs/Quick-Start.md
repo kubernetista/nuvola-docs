@@ -1,30 +1,41 @@
-# Nuvola Quick setup (& problems) - Mark 3
+# Quick Start
 
-## Setup
+## Kubernetes cluster
 
-Do I still need port 2222 (✅) and 3000 (❌) ❓❓
+Create a Kubernetes cluster with k3d/k3s
 
 ```sh
 # Create (with the config already created and updated)
 cd nuvola
 
-#
+# Set it explicitly or loaded from direnv .envrc
+# export K3D_CLUSTER="nuvola-1"
 echo ${K3D_CLUSTER}
 
-#
+# Generate the k3d configuration (using a Just recipe)
 just k3d-cluster-generate-config
 
-#
+# Create the k3d cluster
 just k3d-cluster-create
 
-#
+# Create the required secrets
 kubectl apply -f secrets/
 
-#
+# Get the ArgoCD initial password
 argocd admin initial-password -n argocd | head -n 1
+
+# Open the ArgoCD web UI and login with user "admin" and the password above
+open https://argocd.localtest.me
+
 ```
 
-## Generate a certificate with mkcert, and add it to the Gitea Ingress
+## TLS using kixelated/mkcert
+
+#### ⭕️ TODO: replace this with a container and/or a Dagger module
+
+Generate a new TLS certificate with kixelated/mkcert, and add it tp Traefik.
+
+The certificate will last 20 days (for security reasons) but you can adjust it.
 
 ```sh
 # Generate the certs with expiration in 20gg using kixelated/mkcert
@@ -38,9 +49,6 @@ openssl x509 -in _wildcard.localtest.me.pem -noout -text | bat -l yaml
 
 # Copy the files to the nuvola repo, in a directory excluded from git
 cp _wildcard.localtest.me* ../_nuvola/nuvola/_assets/secrets/
-
-# Eventually the other certs are in the project `traefik-mkcert-docker`
-cd traefik-mkcert-docker/certs
 
 # Switch to the directory containing the certs
 cd nuvola/_assets/secrets
@@ -61,8 +69,8 @@ kubectl apply -f secret-tls-${CERT_NAME}.yaml
 # Restart Traefik to load the new cert
 kubectl rollout restart deployment traefik -n traefik
 
-# Get the ArgoCD initial password and open the web UI
-argocd admin initial-password -n argocd | head -n 1
+# (Eventually, the other certs are in the project `traefik-mkcert-docker`)
+cd traefik-mkcert-docker/certs
 
 ```
 

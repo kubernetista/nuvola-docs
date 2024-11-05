@@ -1,13 +1,42 @@
-site_name: Nuvola
+site_name: Nuvola docs
 site_url: https://docs.localtest.me/
+
+nav:
+  - Home: "index.md"
+  - Quick Start:
+    - Quick Start: "Quick-Start.md"
+    - How it works: "Readme-mark1.md"
+  - Traefik:
+    - Start Traefik & Gitea runner: "TEMP-Readme-Traefik-and-Runner.md"
+  - Examples:
+    - Introduction: "Readme-Usage.md"
+
+markdown_extensions:
+  - attr_list
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji ""
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg ""
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+
+plugins:
+  - search
+  - awesome-pages
+  - privacy
+  # - typeset
 
 theme:
   name: material
   features:
     - navigation.tabs
-    - navigation.tabs.sticky
+    # - navigation.tabs.sticky
     - navigation.instant
-    - navigation.sections
+    # - navigation.sections
   palette:
     # Light Mode
     - media: "(prefers-color-scheme: light)"
@@ -57,31 +86,3 @@ extra:
 extra_css:
   - stylesheets/extra.css
 
-markdown_extensions:
-  - attr_list
-  - pymdownx.emoji:
-      emoji_index: !!python/name:material.extensions.emoji.twemoji
-      emoji_generator: !!python/name:material.extensions.emoji.to_svg
-  - pymdownx.highlight:
-      anchor_linenums: true
-      line_spans: __span
-      pygments_lang_class: true
-  - pymdownx.inlinehilite
-  - pymdownx.snippets
-  - pymdownx.superfences
-
-plugins:
-  - search
-  - awesome-pages
-  - privacy
-  # - typeset
-
-nav:
-  - Home: "index.md"
-  - Quick Start:
-    - Quick Start: "Readme-quick-setup-mark3.md"
-    - How it works: "Readme-mark1.md"
-  - Traefik:
-    - Start Traefik & Gitea runner: "TEMP-Readme-Traefik-and-Runner.md"
-  - Examples:
-    - Introduction: "Readme-Usage.md"
