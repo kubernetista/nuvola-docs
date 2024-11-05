@@ -23,6 +23,7 @@ build *args:
 
 # Built the documentation and then build the container
 cnt-build:
+    @echo "Building the container with tag: {{CONTAINER_TAG}}"
     @just build
     @#docker build -t $(IMAGE_NAME) .
     docker build . -t {{PROJECT_NAME}} -t ghcr.io/kubernetista/{{PROJECT_NAME}}:latest \
