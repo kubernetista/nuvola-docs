@@ -15,6 +15,17 @@ nav:
     - Use Nuvola: "Readme-Usage.md"
   # - Examples:
   #   - Introduction: "Readme-Usage.md"
+  - Old-Docs-Snippets.md
+  - Quick-Start-Tests.md
+  - Readme-Gitea-Runners.md
+  - Readme-k3d-k3s-bootstrap-updates.md
+  - Readme-mark1.md
+  - Readme-mark2.md
+  - TODO-Readme-Dagger-Kubernetes.md
+  - TODO-Readme-Easy-Repo-Switch.md
+  - TODO-Readme-Monitoring-and-Logging.md
+  - TODO-Readme-Registries-and-Certs.md
+
 
 markdown_extensions:
   - attr_list
@@ -39,7 +50,7 @@ plugins:
 theme:
   name: material
   features:
-    - navigation.tabs
+    # - navigation.tabs
     # - navigation.tabs.sticky
     - navigation.instant
     # - navigation.sections
