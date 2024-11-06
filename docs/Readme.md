@@ -24,23 +24,24 @@ just k3d-cluster-create
 
 ## 2. Check ArgoCD deployment progress
 
-```sh
-# Get the ArgoCD initial password
-argocd admin initial-password -n argocd | head -n 1
-```
-
-To check the ArgoCD deployment progesess, open the ArgoCD web UI and login with user "admin" and the initial password from the previous command
+To check the ArgoCD deployment progesess, open the ArgoCD web UI and login with user "admin" and the initial password (see below)
 
 - [ArgoCD](http://argocd.localhost){: target="_blank" } : `http://argocd.localhost`
 
-Or, you can check using the CLI
+You can do the same using the CLI only:
 
 ```sh
-# Watch pod creation
+# Watch pod creation, until ArgoCD is deployed
 kubectl get pod -A -w
+
+# Get the ArgoCD initial password
+argocd admin initial-password -n argocd | head -n 1
 
 # Login to ArgoCD
 argocd login --insecure --grpc-web --username admin argocd.localtest.me
+
+# Refresh the app-of-apps (to speed up the process)
+argocd app get <appName> --hard-refresh
 
 # Check progress
 argocd app wait apps --health --sync
