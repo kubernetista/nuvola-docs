@@ -6,7 +6,23 @@
 # delete current cluster
 k3d cluster delete nuvola-5
 
-# Quick Start
+# 👉🏻 Quick Start 👈🏻
+
+# Watch pod creation, until ArgoCD is deployed
+kubectl get pod -A -w
+
+# Get the ArgoCD initial password
+argocd admin initial-password -n argocd | head -n 1
+
+# Login to ArgoCD
+argocd login --insecure --grpc-web --username admin argocd.localtest.me
+
+# Refresh the app-of-apps (to speed up the process)
+argocd app get <appName> --hard-refresh
+
+# Check progress
+argocd app wait apps --health --sync
+
 ```
 
 ## fastapi-uv
@@ -17,6 +33,8 @@ j dagger-test-push-local
 
 # show recipes
 j dagger-
+j dagger-test
+j dagger-build
 
 # CI
 j dagger-ci
