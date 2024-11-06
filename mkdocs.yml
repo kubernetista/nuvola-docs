@@ -15,6 +15,7 @@ nav:
     - Use Nuvola: "Readme-Usage.md"
   # - Examples:
   #   - Introduction: "Readme-Usage.md"
+  - Demo: "Demo.md"
   - Old-Docs-Snippets.md
   - Quick-Start-Tests.md
   - Readme-Gitea-Runners.md
