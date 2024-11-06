@@ -31,7 +31,7 @@ argocd admin initial-password -n argocd | head -n 1
 
 To check the ArgoCD deployment progesess, open the ArgoCD web UI and login with user "admin" and the initial password from the previous command
 
-- <https://argocd.localhost/>
+- [ArgoCD](http://argocd.localhost){: target="_blank" } : `http://argocd.localhost`
 
 Or, you can check using the CLI
 
@@ -112,9 +112,13 @@ CERT_NAME="wildcard-localtest-me"
 kubectl apply -f secret-tls-${CERT_NAME}.yaml
 
 # Restart Traefik to load the new cert
-kubectl rollout restart deployment traefik -n traefik
+# kubectl rollout restart deployment traefik -n traefik
 
 ```
+
+Check ArgoCD with the TLS certificate:
+
+- [ArgoCD](https://argocd.localtest.me){: target="_blank" } : `https://argocd.localtest.me`
 
 ## 5. Configure Vault and External Secrets
 
