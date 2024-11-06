@@ -1,5 +1,7 @@
 # Quick Start
 
+You need Docker Desktop running.
+
 ## 1. Create a Kubernetes cluster
 
 Create a Kubernetes cluster with k3d/k3s
@@ -49,7 +51,7 @@ argocd app wait apps --health --sync
 
 ```sh
 # Wait until the 'git' namespace exists
-until kubectl get namespace git >/dev/null 2>&1; do
+time until kubectl get namespace git >/dev/null 2>&1; do
   sleep 1
 done
 # Then create the required secrets
@@ -134,6 +136,18 @@ kubectl wait -n vault --for=condition=ready pod -l app.kubernetes.io/instance=va
 # Run the setup script using Just
 just setup-vault-eso-test-app
 ```
+
+## 6. Push a local repo to git and start building
+
+Using a Just recipe, push the Nuvola git repository to Gitea running on Nuvola
+
+```sh
+# Push to git creating the repo as public
+just git-push-local
+```
+
+This step is not required, it's just to show how easy it is to get started with
+your next project.
 
 ## 🎉 Configuration completed
 
