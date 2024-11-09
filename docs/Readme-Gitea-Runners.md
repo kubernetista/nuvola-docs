@@ -1,5 +1,30 @@
 # Gitea Runner
 
+# Setup in kubernetes
+
+Gewt the registration token from:
+
+Site Administration -> Actions -> Runners
+
+- <https://git.localtest.me/admin/actions/runners>
+
+```sh
+# set env var
+export RUNNER_TOKEN="aAbBcCdDeEfFgG"
+
+# update the yaml manifests
+./_scripts/gitea-runner.sh
+
+# Commit and push
+git add gitea-runner/deploy-root.yaml gitea-runner/secret-runner-token.yaml
+git commit -m "update gitea runner config"
+git push origin
+
+# refresh gitea-runner app in ArgoCD (or wait a few minutes)
+```
+
+The Gitea Act Runner should become visible in Active state in the Gitea Runners page.
+
 ## Reference
 
 - <https://gitea.com/gitea/act_runner/src/branch/main/examples/kubernetes>
