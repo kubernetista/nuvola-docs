@@ -2,7 +2,7 @@
 
 # Setup in kubernetes
 
-Gewt the registration token from:
+Get the registration token from:
 
 Site Administration -> Actions -> Runners
 
@@ -42,6 +42,10 @@ act_runner register --no-interactive --token  ${GITEA_RUNNER_TOKEN} --instance h
 sudo act_runner daemon --config ./runner-config.yaml
 
 ```
+
+## Runner docker images
+
+- <https://github.com/catthehacker/docker_images/pkgs/container/ubuntu>
 
 ## Reference
 
