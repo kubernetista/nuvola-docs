@@ -1,5 +1,6 @@
 site_name: Nuvola docs
 site_url: https://docs.localtest.me/
+docs_dir: ./docs
 
 nav:
   - Home: "index.md"
