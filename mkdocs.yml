@@ -95,7 +95,7 @@ theme:
   search: true
 
 extra:
-  generator: false
+  generator: true
   social:
     - icon: fontawesome/brands/github
       link: https://github.com/kubernetista/nuvola
