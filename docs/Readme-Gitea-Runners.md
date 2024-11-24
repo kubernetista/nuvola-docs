@@ -61,6 +61,7 @@ sudo act_runner daemon --config ./runner-config.yaml
 - <https://gitea.com/gitea/act_runner/issues/280>
 - <https://hub.docker.com/_/docker/tags?name=dind>
 - <https://forum.gitea.com/t/act-runner-in-k8s-fail-to-connect-to-docker-daemon/8736/8>
+  - <https://gist.github.com/mariusrugan/911f5da923c93f3c795d3e84bed9e256>
 
 ## catthehacker act runner docker images
 
